@@ -1,0 +1,41 @@
+/* @media (min-width: 550px) {
+  nav > .fa-bars {
+    display: none;
+  }
+} */
+ * {
+  background-color: #3F7969ff;
+ }
+
+
+/* login page */
+h1{
+color: #00563Bff;
+text-align-last: center;
+text-shadow: 1px 0 0 #000, 0 -1px 0 #000;
+font-size: 50px;
+}
+
+
+.loginform {
+margin: 20px;
+font-size: 18px;
+}
+
+
+/* register page */
+
+
+
+
+
+/* main page */
+
+
+/* about me page */
+.aboutp {
+font-size: x-large;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+font-style: italic;
+
+}
