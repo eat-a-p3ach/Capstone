@@ -1,7 +1,7 @@
 import html from "html-literal";
 
 export default state => html`
-  <header><h1>About Lyncy</h1></header>
+  <h1>About Lyncy</h1>
   <p class="aboutp">
     My name is Lyncy. I love life and crave adventure and new experiences. I am
     a wife and mother to two amazing kids. I created this SPA because jiu jitsu

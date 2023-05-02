@@ -1,7 +1,7 @@
 import html from "html-literal";
 
 export default state => html`
-  <header><h1>MyBJJ Book</h1></header>
+  <h1>MyBJJ Book</h1>
   <form action="" method="POST" class="loginform">
     <label for="name">Enter Your Username:</label>
     <input type="text" name="name" id="name" placeholder="Username" required />
