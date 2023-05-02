@@ -1,7 +1,7 @@
 import html from "html-literal";
 
 export default state => html`
-  <header><h1>Create an Account</h1></header>
+  <h1>Create an Account</h1>
   <form action="" method="POST">
     <label for="firstname">First Name</label>
     <input
