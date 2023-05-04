@@ -3,6 +3,9 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+// import dotenv from "dotenv";
+// // Make sure that dotenv.config(); is placed after all of you import statements
+// dotenv.config();
 
 const router = new Navigo("/");
 
@@ -69,10 +72,11 @@ router
     "/": () => render(),
     ":view": params => {
       let view = capitalize(params.data.view);
-      if (store.hasOwnProperty(view)) {
+      if (view in store) {
         render(store[view]);
       } else {
         console.log(`View ${view} not defined`);
+        render(store.Viewnotfound);
       }
     }
   })

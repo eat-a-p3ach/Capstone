@@ -3,4 +3,4 @@
 export { default as Home } from "./Home";
 export { default as About } from "./About";
 export { default as Contact } from "./Contact";
-export { default as MyTraining } from "./MyTraining";
+export { default as Mytraining } from "./Mytraining";

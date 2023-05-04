@@ -1,10 +1,12 @@
 import html from "html-literal";
+import logo from "../assets/logo.jpg";
 // constructing an HTML list of items from the array in Store
 //  - .map formats the array elements into html
 //      and constructs a new array from the results
 //  - .join joins the elements of the new array into one long string
 //  - data-navigo is a switch that allows Navigo to handle our page routing
 export default links => html`
+  <img id="logo" src="${logo}" />
   <nav>
     <i class="fas fa-bars"></i>
     <ul class="hidden--mobile nav-links">
