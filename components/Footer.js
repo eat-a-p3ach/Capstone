@@ -3,6 +3,6 @@ import html from "html-literal";
 export default () => html`
   <footer>
     <hr />
-    &copy; 2020 <a href="https://savvycoders.com/">Savvy Coders</a>
+     &copy; 2020 <a href="https://savvycoders.com/">Savvy Coders</a>
   </footer>
 `;

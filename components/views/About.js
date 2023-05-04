@@ -1,4 +1,5 @@
 import html from "html-literal";
+import freefall from "../../assets/freefall.mp4";
 
 export default state => html`
   <h1>About Lyncy</h1>
@@ -18,7 +19,5 @@ export default state => html`
     always striving to sustain a high level of integrity. I dream of pursuing a
     career where development meets cybersecurity.
   </p>
-  <video width="auto" controls>
-    <source src="./assets/FreeFallMovie (1).mp4" type="video/mp4" />
-  </video>
+  <video id="Fall" src="${freefall}" />
 `;
