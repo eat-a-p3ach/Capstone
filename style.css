@@ -2,11 +2,6 @@
   background-color: #3F7969ff;
  }
 
- #logo {
-width: 100px;
-height: 100px;
- }
-
 h1{
 color: #00563Bff;
 text-align-last: center;
@@ -18,6 +13,16 @@ font-size: 50px;
   .hidden--mobile {
     display: none !important;
   }
+
+  /* NAV BAR  */
+  #logo {
+    height: 40px;
+    width: 40px;
+    float: right;
+    /* border-radius: 50%; */
+    /* margin-left: auto;
+    margin-right: auto; */
+     }
 
   nav {
     display: flex;
@@ -37,17 +42,33 @@ font-size: 50px;
     padding: 0 0;
   }
 
-
+  nav > ul > li {
+    padding: 0.5rem;
+    list-style-type: none;
+  }
 
 /* main page */
 
 
 /* about me page */
-.aboutp {
+#aboutp {
 font-size: x-large;
-font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+font-family: Arial, Helvetica, sans-serif;
 font-style: italic;
 }
+
+#falldiv {
+  margin: auto;
+  width:50%;
+  padding: 10px;
+  border: 10px black;
+}
+
+#fall {
+max-width: 100%;
+height: auto;
+}
+
 
 
 
