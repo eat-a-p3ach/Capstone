@@ -1,5 +1,6 @@
 import html from "html-literal";
 import logo from "../assets/logo.jpg";
+
 // constructing an HTML list of items from the array in Store
 //  - .map formats the array elements into html
 //      and constructs a new array from the results

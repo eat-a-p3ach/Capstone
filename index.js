@@ -3,9 +3,6 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-// import dotenv from "dotenv";
-// // Make sure that dotenv.config(); is placed after all of you import statements
-// dotenv.config();
 
 const router = new Navigo("/");
 
@@ -46,9 +43,9 @@ router.hooks({
           .then(response => {
             // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
             console.log("response", response);
-
             done();
           })
+
           .catch(error => {
             console.log("It puked", error);
             done();
