@@ -38,20 +38,13 @@ router.hooks({
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
           .get(
-            `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&q=st%20louis`
+            `https://api.sportsdata.io/v3/mma/scores/json/Schedule/{league}/{season}?key=${Sportsio_MMA_key}`
           )
           .then(response => {
-            // Convert Kelvin to Fahrenheit since OpenWeatherMap does provide otherwise
-            const kelvinToFahrenheit = kelvinTemp =>
-              Math.round((kelvinTemp - 273.15) * (9 / 5) + 32);
+            store.Home.Sportsio_MMA_key = {};
+            console.log(store.Home.Sportsio_MMA_key);
 
             // Create an object to be stored in the Home state from the response
-            store.Home.weather = {
-              city: response.data.name,
-              temp: kelvinToFahrenheit(response.data.main.temp),
-              feelsLike: kelvinToFahrenheit(response.data.main.feels_like),
-              description: response.data.weather[0].main
-            };
 
             // An alternate method would be to store the values independently
             /*
