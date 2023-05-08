@@ -3,6 +3,8 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = new Navigo("/");
 
@@ -36,55 +38,18 @@ router.hooks({
       // New Case for the Home View
       case "Home":
         axios
-          // Get request to retrieve the current weather data using the API key and providing a city name
-          .get
-          //   `https://accounts.spotify.com/api/token{Spotify_clientID}`
-          ()
+          .get(
+            `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${process.env.FoodData_Central_key}`
+          )
           .then(response => {
-            // store.Home.Spotify_clientID = { b78af366cd354cd0a7b41b8c2f66ce84 };
-            // console.log(store.Home.Spotify_clientID);
-              "access_token": "BQDBKJ5eo5jxbtpWjVOj7ryS84khybFpP_lTqzV7uV-T_m0cTfwvdn5BnBSKPxKgEb11";
-              "token_type": "Bearer";
-              "expires_in": 3600;
-
-
-
-            // Create an object to be stored in the Home state from the response
-
-            // An alternate method would be to store the values independently
-            /*
-      store.Home.weather.city = response.data.name;
-      store.Home.weather.temp = kelvinToFahrenheit(response.data.main.temp);
-      store.Home.weather.feelsLike = kelvinToFahrenheit(response.data.main.feels_like);
-      store.Home.weather.description = response.data.weather[0].main;
-      */
-            done();
-          })
-          .catch(err => {
-            console.log(err);
-            done();
-          });
-        break;
-
-      case "Pizza":
-        // New Axios get request utilizing already made environment variable
-        axios
-          .get(`${process.env.PIZZA_PLACE_API_URL}/pizzas`)
-          .then(response => {
-            // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-            console.log("response", response);
-            store.Pizza.pizzas = response.data;
-            done();
-          })
-          .catch(error => {
-            console.log("It puked", error);
-            done();
+            console.log(response.data);
           });
         break;
       default:
         done();
     }
   },
+
   already: params => {
     const view =
       params && params.data && params.data.view
