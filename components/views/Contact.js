@@ -34,15 +34,5 @@ export default state => html`
     <input type="submit" value="Submit" />
 
     <hr />
-    <div>
-      <nav>
-        <i class="fas fa-bars"></i>
-        <a href="">Home</a>
-        <a href="">Training</a>
-        <a href="">Game Plan</a>
-        <a href="">About</a>
-        <a href="">Contact</a>
-      </nav>
-    </div>
   </form>
 `;

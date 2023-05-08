@@ -1,15 +1,12 @@
 import html from "html-literal";
-import startimage from "/assets/start.jpg";
 
 export default state =>
   html`
-    <div>
-      <img src="assets/start.jpg" alt="" />
-    </div>
-    <p>
-      HOME PAGE - create bar chart from chartsjs.org and pulling information
-      from MyTraining page.
-    </p>
+    <section id="jumbotron">
+      <h2>WELCOME TO MY BJJ BOOK<h2>
+      <h4>Track your brazilian jiu jitsu classes, build your own library, create
+      your competition plan<h5>
+    </section>
     <p>ADD CALENDAR</p>
 
     <hr />
