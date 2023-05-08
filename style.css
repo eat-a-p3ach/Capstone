@@ -3,11 +3,43 @@
   font-family: sans-serif;
  }
 
+ /* HOME PAGE */
+
+ #jumbotron {
+background: url('./assets/start.jpg') center center no-repeat;
+background-color: white;
+background-size: cover;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 90vh;
+ }
+
+ #jumbotron > h2 {
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+
+#jumbotron > h4 {
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+
+ /* HEADER */
 h1{
 color: #00563Bff;
 text-align-last: center;
 text-shadow: 1px 0 0 #000, 0 -1px 0 #000;
 font-size: 50px;
+}
+
+#logo {
+  height: 10%;
+  width: 10%;
+  float: right;
 }
 
 @media (max-width: 549px){
@@ -16,13 +48,6 @@ font-size: 50px;
   }
 
   /* NAV BAR  */
-.start {
-height: 100vh;
-width: 100%;
-background-image:linear-gradient(rgba(0,0,0,0.6),(0,0,0,0.6),url(../Capstone/assets/delariva.jpg))
-background-size:cover;
-background-position: center;
-}
 nav{
 display: flex;
 align-items: center;
@@ -51,8 +76,18 @@ transition: 0.3x;
 }
 
 
+/* MY TRAINING PAGE */
 
-/* main page */
+#jumbotrontwo {
+  background: url('./assets/delariva.jpg') center center no-repeat;
+  background-color: white;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+   }
 
 
 /* about me page */

@@ -37,12 +37,17 @@ router.hooks({
       case "Home":
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
-          .get(
-            `https://api.sportsdata.io/v3/mma/scores/json/Schedule/{league}/{season}?key=${Sportsio_MMA_key}`
-          )
+          .get
+          //   `https://accounts.spotify.com/api/token{Spotify_clientID}`
+          ()
           .then(response => {
-            store.Home.Sportsio_MMA_key = {};
-            console.log(store.Home.Sportsio_MMA_key);
+            // store.Home.Spotify_clientID = { b78af366cd354cd0a7b41b8c2f66ce84 };
+            // console.log(store.Home.Spotify_clientID);
+              "access_token": "BQDBKJ5eo5jxbtpWjVOj7ryS84khybFpP_lTqzV7uV-T_m0cTfwvdn5BnBSKPxKgEb11";
+              "token_type": "Bearer";
+              "expires_in": 3600;
+
+
 
             // Create an object to be stored in the Home state from the response
 
