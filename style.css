@@ -6,7 +6,7 @@
  /* HOME PAGE */
 
  #jumbotron {
-background-image: url('./assets/start.jpg');
+background: url('./assets/start.jpg') center center no-repeat;
 background-color: white;
 background-size: cover;
 display: flex;
@@ -79,7 +79,7 @@ transition: 0.3x;
 /* MY TRAINING PAGE */
 
 #jumbotrontwo {
-  background-image: url('./assets/delariva.jpg');
+  background: url(./assets/armbar.jpg) center center no-repeat;
   background-color: white;
   background-size: cover;
   display: flex;
