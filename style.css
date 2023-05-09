@@ -1,13 +1,30 @@
 * {
   background-color: #3F7969ff;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif
  }
+
+  /* HEADER */
+  header{
+    position: relative;
+    padding: 10px;
+  }
+h1{
+  color: #black;
+  text-align-last: center;
+  text-shadow: 3px 1 1 #00563Bff, 0 -3px 0 #00563Bff;
+  font-size: 60px;
+  }
+
+  #logo {
+    height: 12%;
+    width: 12%;
+    float: left;
+  }
 
  /* HOME PAGE */
 
  #jumbotron {
 background: url('./assets/start.jpg') center center no-repeat;
-background-color: white;
 background-size: cover;
 display: flex;
 flex-direction: column;
@@ -28,42 +45,24 @@ height: 90vh;
   text-align: center;
 }
 
- /* HEADER */
-h1{
-color: #00563Bff;
-text-align-last: center;
-text-shadow: 1px 0 0 #000, 0 -1px 0 #000;
-font-size: 50px;
-}
-
-#logo {
-  height: 10%;
-  width: 10%;
-  float: right;
-}
-
-@media (max-width: 549px){
-  .hidden--mobile {
-    display: none !important;
-  }
-
   /* NAV BAR  */
 nav{
 display: flex;
 align-items: center;
 justify-content: space-between;
+margin: 10px;
 padding-top: 20px;
-padding-left: 10%;
+padding-bottom: 20px;
+padding-left: 20%;
 padding-right: 10%;
-}
-.logo{
-color:white;
-font-size: 28px;
+font-size: 100%
+/* text-shadow: 1px 1 1 black, 0 -1px 0 black; */
 }
 nav ul li{
 list-style-type: none;
 display: inline-block;
 padding: 10px 20px;
+font-weight: bold;
 }
 nav ul li a {
   color: white;
@@ -71,7 +70,8 @@ text-decoration: none;
 font-weight: bold;
 }
 nav ul li a:hover{
-color:darkolivegreen;
+color:#00563Bff;
+text-shadow: 1px 1 1 black, 0 -1px 0 black;
 transition: 0.3x;
 }
 
@@ -95,6 +95,7 @@ transition: 0.3x;
 font-size: x-large;
 font-family: Arial, Helvetica, sans-serif;
 font-style: italic;
+text-align: center
 }
 
 #falldiv {
@@ -110,5 +111,19 @@ height: auto;
 }
 
 
+/* CONTACT PAGE */
+div.form{
+  display: block;
+  text-align: center;
+}
+form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  color: black;
+ }
 
-
+ ::placeholder {
+  color:black;
+ }
