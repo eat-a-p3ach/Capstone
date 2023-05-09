@@ -2,6 +2,7 @@ import html from "html-literal";
 
 export default state => html`
   <h1>Contact Me</h1>
+  <div class="form">
   <p>I'm probably going to add some sort of text here.</p>
   <form action="" method="POST">
     <h2>I'd love to hear from you!</h2>
@@ -34,5 +35,6 @@ export default state => html`
     <input type="submit" value="Submit" />
 
     <hr />
+</div>
   </form>
 `;

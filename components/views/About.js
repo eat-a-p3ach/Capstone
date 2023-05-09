@@ -5,8 +5,7 @@ export default state => html`
   <h1>About Lyncy</h1>
   <section id="aboutp">
     <p>
-      My name is Lyncy. I love life and crave adventure and new experiences. I
-      am a wife and mother to two amazing kids. I created this SPA because jiu
+      My name is Lyncy. I love life and crave adventure and new experiences. I created this SPA because jiu
       jitsu is something that is important to my family. My
       intention was to organize what I learn in different classes each week and
       be able to expand on what I learn. This SPA acts as a journal where the
