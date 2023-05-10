@@ -46,7 +46,7 @@ height: 90vh;
 }
 
   /* NAV BAR  */
-nav{
+nav {
 display: flex;
 align-items: center;
 justify-content: space-between;
