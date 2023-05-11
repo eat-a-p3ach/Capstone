@@ -1,4 +1,5 @@
 import html from "html-literal";
+import arm from "../../assets/arm.jpg";
 
 export default state => html`
   <h1>Contact Me</h1>
@@ -14,6 +15,7 @@ export default state => html`
       placeholder="Enter Your Full Name"
       required
     />
+
 
     <label for="email">Email:</label>
     <input
@@ -33,6 +35,9 @@ export default state => html`
     </div>
 
     <input type="submit" value="Submit" />
+
+    <img src="${arm}" />;
+
 
     <hr />
 </div>
