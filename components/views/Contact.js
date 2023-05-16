@@ -1,5 +1,5 @@
 import html from "html-literal";
-import arm from "../../assets/arm.jpg";
+
 
 export default state => html`
   <h1>Contact Me</h1>
@@ -36,10 +36,6 @@ export default state => html`
 
     <input type="submit" value="Submit" />
 
-    <img src="${arm}" />;
-
-
-    <hr />
 </div>
   </form>
 `;

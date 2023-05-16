@@ -6,5 +6,5 @@ export default state =>
       TRAINING PAGE - CREATE FLOW CHART
     </section>
     <br />
-    <div>TRAINING PAGE - will be creating API</div>
+    <div id="calendar"></div>
   `;
