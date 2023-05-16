@@ -56,20 +56,20 @@ router.hooks({
             done();
           });
         break;
-      // case "Mytraining":
-      //   axios
-      //     .get(
-      //       `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${process.env.KEY}`
-      //     )
-      //     .then(response => {
-      //       console.log(response.data);
-      //       done(); // Added done() here
-      //     });
-      //   break;
-      // default:
-      //     done();
-  //   }
-  // },
+      case "Mytraining":
+        axios
+          .get(
+            `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${process.env.KEY}`
+          )
+          .then(response => {
+            console.log(response.data);
+            done(); // Added done() here
+          });
+        break;
+      default:
+        done();
+    }
+  },
   already: params => {
     const view =
       params && params.data && params.data.view
