@@ -56,15 +56,15 @@ router.hooks({
             done();
           });
         break;
-      case "Mytraining":
-        axios
-          .get(
-            `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${process.env.KEY}`
-          )
-          .then(response => {
-            console.log(response.data);
-            done(); // Added done() here
-          });
+        // case "Mytraining":
+        //   axios
+        //     .get(
+        //       `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${process.env.KEY}`
+        //     )
+        //     .then(response => {
+        //       console.log(response.data);
+        //       done(); // Added done() here
+        //     });
         break;
       default:
         done();
