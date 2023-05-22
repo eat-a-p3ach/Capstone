@@ -3,7 +3,7 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-// Make sure that dotenv.config(); is placed after all of you import statements
+
 const router = new Navigo("/");
 
 function render(state = store.Home) {
@@ -24,6 +24,18 @@ function afterRender(state) {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
 }
+
+axios
+  .post(`${process.env.MONGODB}/moves`, requestData)
+  .then(response => {
+    // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+    store.Move.moves.push(response.data);
+    router.navigate("/Move");
+  })
+  .catch(error => {
+    console.log("It puked", error);
+  });
+
 router.hooks({
   before: (done, params) => {
     const view =
@@ -56,15 +68,15 @@ router.hooks({
             done();
           });
         break;
-        // case "Mytraining":
-        //   axios
-        //     .get(
-        //       `https://api.nal.usda.gov/fdc/v1/foods/list?api_key=${process.env.KEY}`
-        //     )
-        //     .then(response => {
-        //       console.log(response.data);
-        //       done(); // Added done() here
-        //     });
+
+      case "Mymoves":
+        axios
+          .get(`${process.env.MONGODB}/moves`, requestData)
+          .then(response => {
+            store.Move.moves.push(response.data);
+            router.navigate("/Move");
+            done();
+          });
         break;
       default:
         done();

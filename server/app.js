@@ -2,7 +2,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const library = require("./routers/library");
+const moves = require("./routers/moves");
 
 // Initialize the Express application
 const app = express();
@@ -59,7 +59,7 @@ app.get("/status", (request, response) => {
 
 //app.post
 
-app.use("/library", library);
+app.use("/library/moves", moves);
 
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 4040

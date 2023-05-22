@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const librarySchema = new mongoose.Schema({
+const moveSchema = new mongoose.Schema({
   user: {
     type: String,
     required: true,
@@ -8,8 +8,7 @@ const librarySchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true,
-    validate: /^[A-Za-z0-9 ]*$/
+    required: true
   },
   tag: {
     type: String,
@@ -20,11 +19,13 @@ const librarySchema = new mongoose.Schema({
     required: true,
     validate: /^[A-Za-z0-9 ]*$/
   },
-  message: String,
-  required: true,
-  validate: /^[A-Za-z0-9 ]*$/
+  message: {
+    type: String,
+    required: true,
+    validate: /^[A-Za-z0-9 ]*$/
+  }
 });
 
-const Library = mongoose.model("Library", librarySchema);
+const Move = mongoose.model("Move", moveSchema);
 
-module.exports = Library;
+module.exports = Move;
