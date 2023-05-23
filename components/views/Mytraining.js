@@ -1,6 +1,6 @@
 import html from "html-literal";
 
-export default state =>
+export default () =>
   html`
     <section id="jumbotrontwo">
       TRAINING PAGE - CREATE FLOW CHART

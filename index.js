@@ -23,45 +23,45 @@ function afterRender(state) {
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
-}
 
-if (state.view === "Mytraining") {
-  document.querySelector("form").addEventListener("submit", event => {
-    //prevent default action aka redirect to the same url using POST method
-    event.preventDefault();
+  if (state.view === "Mytraining") {
+    document.querySelector("form").addEventListener("submit", event => {
+      //prevent default action aka redirect to the same url using POST method
+      event.preventDefault();
 
-    const inputList = event.target.elements;
-    console.log("Input Element List", inputList);
+      const inputList = event.target.elements;
+      console.log("Input Element List", inputList);
 
-    const Mymoves = [];
-    // Iterate over the toppings input group elements
-    // for (let input of inputList.moves) {
-    //   // If the value of the checked attribute is true then add the value to the toppings array
-    //   if (input.checked) {
-    //     Mymoves.push(input.value);
-    //   }
-    // }
+      const Mymoves = [];
+      // Iterate over the toppings input group elements
+      // for (let input of inputList.moves) {
+      //   // If the value of the checked attribute is true then add the value to the toppings array
+      //   if (input.checked) {
+      //     Mymoves.push(input.value);
+      //   }
+      // }
 
-    const requestData = {
-      user: inputList.user.value,
-      date: inputList.date.value,
-      tag: inputList.tag.value,
-      move: inputList.move.value,
-      message: inputList.message.value
-    };
-    console.log("request Body", requestData);
+      const requestData = {
+        user: inputList.user.value,
+        date: inputList.date.value,
+        tag: inputList.tag.value,
+        move: inputList.move.value,
+        message: inputList.message.value
+      };
+      console.log("request Body", requestData);
 
-    axios
-      .post(`${process.env.MONGODB}/moves`, requestData)
-      .then(response => {
-        // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-        store.Move.moves.push(response.data);
-        router.navigate("/Move");
-      })
-      .catch(error => {
-        console.log("It puked", error);
-      });
-  });
+      axios
+        .post(`${process.env.MONGODB}/moves`, requestData)
+        .then(response => {
+          // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+          store.Move.moves.push(response.data);
+          router.navigate("/Mymoves");
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
+    });
+  }
 }
 
 router.hooks({
@@ -101,8 +101,12 @@ router.hooks({
         axios
           .get(`${process.env.MONGODB}/moves`, requestData)
           .then(response => {
-            store.Move.moves.push(response.data);
-            router.navigate("/Move");
+            console.log("response", response);
+            store.Move.moves = response.data;
+            done();
+          })
+          .catch(error => {
+            console.log("It puked", error);
             done();
           });
         break;
@@ -116,7 +120,7 @@ router.hooks({
         ? capitalize(params.data.view)
         : "Home";
 
-    render(store[view]);
+    // render(store[view]);
   }
 });
 router
@@ -124,10 +128,11 @@ router
     "/": () => render(),
     ":view": params => {
       let view = capitalize(params.data.view);
-      if (store.hasOwnProperty(view)) {
+      if (view in store) {
         render(store[view]);
       } else {
         console.log(`View ${view} not defined`);
+        render(store.Viewnotfound);
       }
     }
   })
