@@ -51,7 +51,9 @@ router.put("/:id", (request, response) => {
         //add tag and message
         user: body.user,
         date: body.date,
-        move: body.move
+        tag: body.tag,
+        move: body.move,
+        message: body.message
       }
     },
     {
