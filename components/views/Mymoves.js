@@ -14,9 +14,7 @@ export default state => html`
     </tr>
     ${state.moves
       .map(moves => {
-        return `<tr><td>${moves.date}</td><td>${moves.tag}</td><td>${
-          moves.move
-        }</td><td>${moves.message.join(" & ")}</td><td>${moves.user}</td></tr>`;
+        return `<tr><td>${moves.date}</td><td>${moves.tag}</td><td>${moves.move}</td><td>${moves.message}</td><td>${moves.user}</td></tr>`;
       })
       .join("")}
   </table>

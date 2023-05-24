@@ -10,8 +10,8 @@ export default () =>
 
     <div class="form">
       <form action="" method="POST" class="library">
-        <label for="name">Enter Your Name:</label>
-        <input type="text" name="name" id="name" placeholder="Your Name" />
+        <label for="user">Enter Your Name:</label>
+        <input type="text" name="user" id="user" placeholder="Your Name" />
 
         <label for="date">DATE</label>
         <input type="text" name="date" id="date" placeholder="Today's date" />
@@ -25,8 +25,8 @@ export default () =>
         <label for="move">Tag this new move</label>
         <input
           type="text"
-          name="name"
-          id="name"
+          name="move"
+          id="move"
           placeholder="for example: armbar"
         />
 

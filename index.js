@@ -46,15 +46,15 @@ function afterRender(state) {
         date: inputList.date.value,
         tag: inputList.tag.value,
         move: inputList.move.value,
-        message: inputList.message.value
+        message: inputList.msg.value
       };
       console.log("request Body", requestData);
 
       axios
-        .post(`${process.env.MONGODB}/moves`, requestData)
+        .post(`${process.env.API_URL}/library/moves`, requestData)
         .then(response => {
           // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-          store.Move.moves.push(response.data);
+          store.Mymoves.moves.push(response.data);
           router.navigate("/Mymoves");
         })
         .catch(error => {
@@ -98,11 +98,12 @@ router.hooks({
         break;
 
       case "Mymoves":
+        console.log(process.env.API_URL);
         axios
-          .get(`${process.env.MONGODB}/moves`, requestData)
+          .get(`${process.env.API_URL}/library/moves`)
           .then(response => {
             console.log("response", response);
-            store.Move.moves = response.data;
+            store.Mymoves.moves = response.data;
             done();
           })
           .catch(error => {
