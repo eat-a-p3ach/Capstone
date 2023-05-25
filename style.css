@@ -159,31 +159,7 @@ transition: 0.2x;
   height: 90vh;
    }
 
-   /* MY TRAINING - FORM for LIBRARY */
-
-
-/* about me page */
-#aboutp {
-font-size: x-large;
-font-family: Arial, Helvetica, sans-serif;
-font-style: italic;
-text-align: center
-}
-
-#falldiv {
-  margin: auto;
-  width:50%;
-  padding: 10px;
-  border: 10px black;
-}
-
-#fall {
-max-width: 100%;
-height: auto;
-}
-
-
-/* CONTACT PAGE */
+/* MOVES FORM */
 div.form{
   box-sizing: border-box;
   text-align: center;
@@ -226,3 +202,76 @@ form {
  ::placeholder {
   color:black;
  }
+   /* MY TRAINING - FORM for LIBRARY */
+
+
+
+
+/* ABOUT PAGE */
+#aboutp {
+font-size: x-large;
+font-family: Arial, Helvetica, sans-serif;
+font-style: italic;
+text-align: center
+}
+
+#falldiv {
+  margin: auto;
+  width:50%;
+  padding: 10px;
+  border: 10px black;
+}
+
+#fall {
+max-width: 100%;
+height: auto;
+}
+
+
+
+
+
+/*CONTACT PAGE FORM */
+ div.contactform {
+  box-sizing: border-box;
+  text-align: center;
+}
+.contactform.input[type=text], select, textarea {
+  width: 100%;
+  padding: 20px;
+  border: 5px solid lightslategray;
+  border-radius: 4px;
+  resize: vertical;
+}
+/* this spreads boxes out */
+.contactform.label {
+  padding: 15px 12px 18px 0;
+  display: inline-block;
+}
+.contactform.input[type=submit] {
+  background-color: black;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  /* rounds out edges */
+  border-radius: 11px;
+  cursor:pointer;
+  float: right;
+}
+/* hovering over submit button */
+.contactform.input[type=submit]:hover {
+  background-color: purple;
+}
+/* the form itself centered, text left  */
+.contactform {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  color: black;
+ }
+
+ .contactform::placeholder {
+  color:black;
+ }
+

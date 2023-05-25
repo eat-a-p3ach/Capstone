@@ -14,12 +14,17 @@ export default () =>
         <input type="text" name="user" id="user" placeholder="Your Name" />
 
         <label for="date">DATE</label>
-        <input type="text" name="date" id="date" placeholder="Today's date" />
-
-        <label for="tag">tag:</label>
+        <input type="datetime-local" id="Test_DatetimeLocal" />
+        <!-- <input type="text" name="date" id="date" placeholder="Today's date" /> -->
+        <br />
+        <label for="tag">Belt color:</label>
         <select name="tag" id="tag">
-          <option value="tag">#</option>
           <option value="tag"></option>
+          <option value="tag">white belt</option>
+          <option value="tag">blue belt</option>
+          <option value="tag">purple belt</option>
+          <option value="tag">brown belt</option>
+          <option value="tag">black belt</option>
         </select>
 
         <label for="move">Tag this new move</label>
@@ -32,7 +37,7 @@ export default () =>
 
         <div>
           <label for="msg">Enter your message:</label>
-          <textarea name="msg" id="msg" cols="50" rows="20"></textarea>
+          <textarea name="msg" id="msg" cols="40" rows="10"></textarea>
         </div>
 
         <div>

@@ -43,7 +43,7 @@ function afterRender(state) {
 
       const requestData = {
         user: inputList.user.value,
-        date: inputList.date.value,
+        date: inputList.Test_DatetimeLocal.value,
         tag: inputList.tag.value,
         move: inputList.move.value,
         message: inputList.msg.value
