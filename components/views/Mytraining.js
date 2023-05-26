@@ -20,11 +20,11 @@ export default () =>
         <label for="tag">Belt color:</label>
         <select name="tag" id="tag">
           <option value="tag"></option>
-          <option value="tag">white belt</option>
-          <option value="tag">blue belt</option>
-          <option value="tag">purple belt</option>
-          <option value="tag">brown belt</option>
-          <option value="tag">black belt</option>
+          <option value="white">white belt</option>
+          <option value="blue">blue belt</option>
+          <option value="purple">purple belt</option>
+          <option value="brown">brown belt</option>
+          <option value="black">black belt</option>
         </select>
 
         <label for="move">Tag this new move</label>

@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const moves = require("./routers/moves");
+const lessons = require("./routers/lessons");
 
 // Initialize the Express application
 const app = express();
@@ -46,6 +47,9 @@ const cors = (req, res, next) => {
 app.use(cors);
 app.use(express.json());
 app.use(logging);
+
+//calendar route
+app.use("/lessons", lessons);
 
 // Handle the request with HTTP GET method from http://localhost:4040/status
 app.get("/status", (request, response) => {

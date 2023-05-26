@@ -5,6 +5,7 @@ import { capitalize } from "lodash";
 import axios from "axios";
 
 const router = new Navigo("/");
+const calendar;
 
 function render(state = store.Home) {
   document.querySelector("#root").innerHTML = `
@@ -63,6 +64,21 @@ function afterRender(state) {
     });
   }
 }
+
+//per https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
+//but I'm not exactly sure if this is the right spot
+function handleEventDragResize(info) {
+  const event = info.event;
+
+  if (confirm("Are you sure about this change?")) {
+    const requestData = {
+      user: event.title,
+      start: event.start.toJSON(),
+      end: event.end.toJSON(),
+      starttime: event.starttime.toJSON(),
+      endtime: event.endtime.toJSON(),
+      text: event.text
+    };
 
 router.hooks({
   before: (done, params) => {
