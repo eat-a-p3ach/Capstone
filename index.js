@@ -298,7 +298,7 @@ router.hooks({
 
   // line 173 https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
   // convert these if statements to switch cases
-  case ""
+  case "Home"
 
 
 
