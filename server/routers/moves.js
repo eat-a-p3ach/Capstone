@@ -48,12 +48,11 @@ router.put("/:id", (request, response) => {
     {
       $set: {
         // Take note that the customer is not included, so it can't update the customer
-        //add tag and message
         user: body.user,
         date: body.date,
         tag: body.tag,
         move: body.move,
-        message: body.message
+        message: body.msg
       }
     },
     {

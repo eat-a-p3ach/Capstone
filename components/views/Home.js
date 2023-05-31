@@ -7,7 +7,12 @@ export default state =>
       <h4>Track your brazilian jiu jitsu classes, build your own library, create
       your competition plan<h5>
     </section>
-    <p>ADD CALENDAR</p>
+
+
+    <!-- https://fullcalendar.io/docs/daygrid-view -->
+<section>
+
+</section>
 
 
     <h3>
