@@ -90,7 +90,7 @@ function afterRender(state) {
   }
 
   //lines 83-171 in https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
-  if (state.view === "Lessons" && state.lessons) {
+  if (state.view === "Home" && state.lessons) {
     const calendarEl = document.getElementById("calendar");
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",

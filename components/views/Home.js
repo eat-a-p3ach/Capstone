@@ -10,9 +10,9 @@ export default state =>
 
 
     <!-- https://fullcalendar.io/docs/daygrid-view -->
-<section>
 
-</section>
+<div id="calendar"></div>
+
 
 
     <h3>

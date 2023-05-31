@@ -15,10 +15,10 @@ const lessonSchema = new mongoose.Schema({
     required: true
   },
   timestart: {
-    type: time
+    type: String,
   },
   timeend: {
-    type: time
+    type: String,
   },
   text: {
     type: String
