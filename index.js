@@ -3,6 +3,7 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+import { text } from "stream/consumers";
 
 const router = new Navigo("/");
 const calendar;
@@ -25,24 +26,29 @@ function render(state = store.Home) {
 function handleEventDragResize(info) {
   const event = info.event;
 
+
 // add menu toggle to bars icon in nav bar
 function afterRender(state) {
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
 
-
+//this is lines 28-48 in example, but I think I need to put this before afterRender
   if (confirm("Are you sure about this change?")) {
     const requestData = {
-      customer: event.title,
+      user: event.title,
       start: event.start.toJSON(),
       end: event.end.toJSON(),
+      timestart:event.timestart.toJSON(),
+      timeend: event.timeend.toJSON(),
+      text: event.text.toJSON(),
       url: event.url
+
     };
 
 
     axios
-      .put(`${process.env.API_URL}/appointments/${event.id}`, requestData)
+      .put(`${process.env.CAL_API_URL}/appointments/${event.id}`, requestData)
       .then(response => {
         console.log(`Event '${response.data.customer}' (${response.data._id}) has been updated.`);
       })
@@ -55,6 +61,8 @@ function afterRender(state) {
   }
 }
 
+// CAL_API_URL
+
 
 function addEventListeners(state) {
   // add menu toggle to bars icon in nav bar
@@ -64,27 +72,29 @@ function addEventListeners(state) {
       document.querySelector("nav > ul").classList.toggle("hidden--mobile")
     );
 
-
+//line 58 in example
   if (state.view === "Schedule") {
       document.querySelector("form").addEventListener("submit", event => {
         event.preventDefault();
 
         const inputList = event.target.elements;
 
-        //this part
         const requestData = {
           customer: inputList.customer.value,
           start: new Date(inputList.start.value).toJSON(),
           end: new Date(inputList.end.value).toJSON(),
+          //below I also had option of new TimeRanges ?
+          timestart: new Time(inputList.start.value).toJSON();
+          timeend: new Time(inputList.end.value).toJSON();
+          text: new Text(inputList.value)
         };
 
-        //what url do I use here?
         axios
-          .post(`${process.env.API_URL}/appointments`, requestData)
+          .post(`${process.env.CAL_API_URL}/lessons`, requestData)
           .then(response => {
             // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-            store.Appointments.appointments.push(response.data);
-            router.navigate("/appointments");
+            store.Lessons.lessons.push(response.data);
+            router.navigate("/lessons");
           })
           .catch(error => {
             console.log("It puked", error);
@@ -93,8 +103,7 @@ function addEventListeners(state) {
     }
 
 //lines 83-171 in https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
-
-if (state.view === "Appointments" && state.appointments) {
+if (state.view === "Lessons" && state.lessons) {
   const calendarEl = document.getElementById('calendar');
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
@@ -126,25 +135,28 @@ if (state.view === "Appointments" && state.appointments) {
       handleEventDragResize(info);
     },
     select: (info) => {
-      const customer = prompt("Please enter a title");
+      const user = prompt("Please enter a title");
 
-      if (customer) {
+      if (user) {
         const requestData = {
-          customer: customer,
+          user: user,
           start: info.start.toJSON(),
           end: info.end.toJSON(),
+          timestart: info.start.toJSON(),
+          timeend: info.end.toJSON(),
+          text: info.toJSON(),
           allDay: info.view.type === 'dayGridMonth'
         };
 
         axios
-        .post(`${process.env.API_URL}/appointments`, requestData)
+        .post(`${process.env.CAL_API_URL}/lessons`, requestData)
         .then(response => {
           // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-          response.data.title = response.data.customer;
-          response.data.url = `/appointments/${response.data._id}`;
+          response.data.title = response.data.user;
+          response.data.url = `/lessons/${response.data._id}`;
           console.log('lyncy-response.data:', response.data);
-          store.Appointments.appointments.push(response.data);
-          console.log(`Event '${response.data.customer}' (${response.data._id}) has been created.`);
+          store.Lessons.lessons.push(response.data);
+          console.log(`Event '${response.data.user}' (${response.data._id}) has been created.`);
           calendar.addEvent(response.data);
           calendar.unselect();
         })
@@ -159,20 +171,20 @@ if (state.view === "Appointments" && state.appointments) {
   });
   calendar.render();
 }
-
-if (state.view === "Appointments" && state.event) {
-  const deleteButton = document.getElementById("delete-appointment");
+//line 149 in example
+if (state.view === "Lessons" && state.event) {
+  const deleteButton = document.getElementById("delete-lesson");
   deleteButton.addEventListener("click", (event) => {
     deleteButton.disabled = true;
     console.log('lyncy-event.target.dataset.id:', event.target.dataset.id);
 
-    if (confirm("Are you sure you want to delete this appointment")) {
+    if (confirm("Are you sure you want to delete this lesson")) {
       axios
-      .delete(`${process.env.API_URL}/appointments/${event.target.dataset.id}`)
+      .delete(`${process.env.CAL_API_URL}/lessons/${event.target.dataset.id}`)
       .then(response => {
         // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-        console.log(`Event '${response.data.customer}' (${response.data._id}) has been deleted.`);
-        router.navigate('/appointments');
+        console.log(`Event '${response.data.user}' (${response.data._id}) has been deleted.`);
+        router.navigate('/lessons');
       })
       .catch(error => {
         console.log("It puked", error);
@@ -183,10 +195,9 @@ if (state.view === "Appointments" && state.event) {
   });
 }
 }
-
 // end lines 83-171
 
-
+//this begins form from Mytraining populates to Mymoves
   if (state.view === "Mytraining") {
     document.querySelector("form").addEventListener("submit", event => {
       //prevent default action aka redirect to the same url using POST method
@@ -229,18 +240,18 @@ if (state.view === "Appointments" && state.event) {
 
 //per https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
 //but I'm not exactly sure if this is the right spot
-function handleEventDragResize(info) {
-  const event = info.event;
+// function handleEventDragResize(info) {
+//   const event = info.event;
 
-  if (confirm("Are you sure about this change?")) {
-    const requestData = {
-      user: event.title,
-      start: event.start.toJSON(),
-      end: event.end.toJSON(),
-      starttime: event.starttime.toJSON(),
-      endtime: event.endtime.toJSON(),
-      text: event.text
-    };
+//   if (confirm("Are you sure about this change?")) {
+//     const requestData = {
+//       user: event.title,
+//       start: event.start.toJSON(),
+//       end: event.end.toJSON(),
+//       starttime: event.starttime.toJSON(),
+//       endtime: event.endtime.toJSON(),
+//       text: event.text
+//     };
 
 
 
@@ -296,9 +307,36 @@ router.hooks({
     }
   },
 
+  // CAL_API_URL
+
   // line 173 https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
   // convert these if statements to switch cases
-  case "Home"
+  case "HomeCal":
+  //This is HomeCal for Home page Calendar because case "Home" at 266 is for openweathermap API
+  //lines 199-218 in example
+  axios
+  .get(`${process.env.CAL_API_URL}/lessons`)
+  .then((response) => {
+    const events = response.data.map(event => {
+      return {
+        id: event._id,
+        title: event.customer,
+        start: new Date(event.start),
+        end: new Date(event.end),
+        timestart: new Time(event.start),
+        timeend: new Time(event.end),
+        url: `/lessons/${event._id}`,
+        allDay: event.allDay || false
+      };
+    });
+    store.Lessons.event = null;
+    store.Lessons.lessons = events;
+    done();
+  })
+  .catch((error) => {
+    console.log("It puked", error);
+  });
+//Do I create another case for the else if statement on line 219 on https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
 
 
 
