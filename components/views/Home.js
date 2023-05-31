@@ -1,6 +1,4 @@
 import html from "html-literal";
-import { Calendar } from "fullcalendar/core";
-import dayGridPlugin from "fullcalendar/daygrid";
 
 export default state =>
   html`
