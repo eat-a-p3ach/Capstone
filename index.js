@@ -24,20 +24,17 @@ function render(state = store.Home) {
 
 function handleEventDragResize(info) {
   const event = info.event;
-  //this is lines 28-48 in example, but I think I need to put this before afterRender
   if (confirm("Are you sure about this change?")) {
     const requestData = {
       user: event.title,
       start: event.start.toJSON(),
       end: event.end.toJSON(),
-      timestart: event.timestart.toJSON(),
-      timeend: event.timeend.toJSON(),
       text: event.text.toJSON(),
       url: event.url
     };
 
     axios
-      .put(`${process.env.CAL_API_URL}/appointments/${event.id}`, requestData)
+      .put(`${process.env.CAL_API_URL}/lessons/${event.id}`, requestData)
       .then(response => {
         console.log(
           `Event '${response.data.customer}' (${response.data._id}) has been updated.`
@@ -61,19 +58,16 @@ function afterRender(state) {
     );
 
   //line 58 in example
-  if (state.view === "Schedule") {
+  if (state.view === "Lessons") {
     document.querySelector("form").addEventListener("submit", event => {
       event.preventDefault();
 
       const inputList = event.target.elements;
 
       const requestData = {
-        customer: inputList.customer.value,
+        user: inputList.user.value,
         start: new Date(inputList.start.value).toJSON(),
         end: new Date(inputList.end.value).toJSON(),
-        //below I also had option of new TimeRanges ?
-        // timestart: new Time(inputList.start.value).toJSON(),
-        // timeend: new Time(inputList.end.value).toJSON(),
         text: new Text(inputList.value)
       };
 
@@ -81,8 +75,8 @@ function afterRender(state) {
         .post(`${process.env.CAL_API_URL}/lessons`, requestData)
         .then(response => {
           // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-          store.Lessons.lessons.push(response.data);
-          router.navigate("/lessons");
+          store.Home.lessons.push(response.data);
+          router.navigate("/Home");
         })
         .catch(error => {
           console.log("It puked", error);
