@@ -140,8 +140,8 @@ text-decoration: none;
 font-weight: bold;
 }
 nav ul li a:hover{
-color:darkslategray;
-text-shadow: 1px 1 1 black, 0 -1px 0 black;
+color:black;
+text-shadow: 1px 1 1 gray, 0 -1px 0 gray;
 transition: 0.2x;
 }
 
