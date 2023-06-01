@@ -1,4 +1,3 @@
-const { time } = require("console");
 const mongoose = require("mongoose");
 
 const lessonSchema = new mongoose.Schema({
@@ -14,13 +13,7 @@ const lessonSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  timestart: {
-    type: String,
-  },
-  timeend: {
-    type: String,
-  },
-  text: {
+  url: {
     type: String
   },
   allDay: {
