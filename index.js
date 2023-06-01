@@ -4,6 +4,7 @@ import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
 import { text } from "stream/consumers";
+import { timeEnd } from "console";
 
 const router = new Navigo("/");
 var calendar;
@@ -90,7 +91,7 @@ function afterRender(state) {
   }
 
   //lines 83-171 in https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
-  if (state.view === "Lessons" && state.lessons) {
+  if (state.view === "Home" && state.lessons) {
     const calendarEl = document.getElementById("calendar");
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
@@ -106,7 +107,7 @@ function afterRender(state) {
         day: "Day",
         list: "List"
       },
-      height: "100%",
+      height: "500px",
       dayMaxEventRows: true,
       navLinks: true,
       editable: true,
@@ -129,9 +130,6 @@ function afterRender(state) {
             user: user,
             start: info.start.toJSON(),
             end: info.end.toJSON(),
-            timestart: info.start.toJSON(),
-            timeend: info.end.toJSON(),
-            text: info.toJSON(),
             allDay: info.view.type === "dayGridMonth"
           };
 
@@ -140,14 +138,15 @@ function afterRender(state) {
             .then(response => {
               // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
               response.data.title = response.data.user;
-              response.data.url = `/lessons/${response.data._id}`;
+              // response.data.url = `/lessons/${response.data._id}`;
               console.log("lyncy-response.data:", response.data);
-              store.Lessons.lessons.push(response.data);
+              store.Home.lessons.push(response.data);
               console.log(
                 `Event '${response.data.user}' (${response.data._id}) has been created.`
               );
               calendar.addEvent(response.data);
               calendar.unselect();
+              router.navigate("/Home");
             })
             .catch(error => {
               console.log("It puked", error);
@@ -156,7 +155,7 @@ function afterRender(state) {
           calendar.unselect();
         }
       },
-      events: state.appointments || []
+      events: state.lessons || []
     });
     calendar.render();
   }
@@ -236,22 +235,42 @@ router.hooks({
     // Add a switch case statement to handle multiple routes
     switch (view) {
       case "Home":
-        axios
-          // Get request to retrieve the current weather data using the API key and providing a city name
-          .get(
-            `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&q=st%20louis`
-          )
-          .then(response => {
+        Promise.allSettled([
+          axios
+            // Get request to retrieve the current weather data using the API key and providing a city name
+            .get(
+              `https://api.openweathermap.org/data/2.5/weather?appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&q=st%20louis`
+            ),
+          axios.get(`${process.env.CAL_API_URL}/lessons`)
+        ])
+          .then(responses => {
+            const [weatherResponse, lessonsResponse] = responses;
             // Convert Kelvin to Fahrenheit since OpenWeatherMap does provide otherwise
             const kelvinToFahrenheit = kelvinTemp =>
               Math.round((kelvinTemp - 273.15) * (9 / 5) + 32);
             // Create an object to be stored in the Home state from the response
             store.Home.weather = {
-              city: response.data.name,
-              temp: kelvinToFahrenheit(response.data.main.temp),
-              feelsLike: kelvinToFahrenheit(response.data.main.feels_like),
-              description: response.data.weather[0].main
+              city: weatherResponse.value.data.name,
+              temp: kelvinToFahrenheit(weatherResponse.value.data.main.temp),
+              feelsLike: kelvinToFahrenheit(
+                weatherResponse.value.data.main.feels_like
+              ),
+              description: weatherResponse.value.data.weather[0].main
             };
+
+            const events = lessonsResponse.value.data.map(event => {
+              return {
+                id: event._id,
+                title: event.user,
+                start: new Date(event.start),
+                end: new Date(event.end),
+                url: `/lessons/${event._id}`,
+                allDay: event.allDay || false
+              };
+            });
+            store.Home.event = null;
+            store.Home.lessons = events;
+
             done();
           })
           .catch(err => {
@@ -275,36 +294,6 @@ router.hooks({
           });
         break;
 
-      // CAL_API_URL
-      // line 173 https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
-      // convert these if statements to switch cases
-      case "HomeCal":
-        //This is HomeCal for Home page Calendar because case "Home" at 266 is for openweathermap API
-        //lines 199-218 in example
-        axios
-          .get(`${process.env.CAL_API_URL}/lessons`)
-          .then(response => {
-            const events = response.data.map(event => {
-              return {
-                id: event._id,
-                title: event.customer,
-                start: new Date(event.start),
-                end: new Date(event.end),
-                timestart: new Time(event.start),
-                timeend: new Time(event.end),
-                url: `/lessons/${event._id}`,
-                allDay: event.allDay || false
-              };
-            });
-            store.Lessons.event = null;
-            store.Lessons.lessons = events;
-            done();
-          })
-          .catch(error => {
-            console.log("It puked", error);
-          });
-        //Do I create another case for the else if statement on line 219 on https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
-        break;
       default:
         done();
     }

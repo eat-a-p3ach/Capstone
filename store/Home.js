@@ -1,7 +1,7 @@
 export default {
   header: "My BJJ Journal",
   view: "Home",
-  appointments: [],
+  lessons: [],
   event: {},
   data: {}
 };
