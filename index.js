@@ -29,7 +29,7 @@ function handleEventDragResize(info) {
       user: event.title,
       start: event.start.toJSON(),
       end: event.end.toJSON(),
-      text: event.text.toJSON(),
+      text: event.text,
       url: event.url
     };
 
@@ -92,7 +92,8 @@ function afterRender(state) {
       headerToolbar: {
         left: "prev,next today",
         center: "title",
-        right: "dayGridMonth,timeGridWeek,timeGridDay"
+        //check out https://fullcalendar.io/docs/v5/list-view for view options
+        right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
       },
       buttonText: {
         today: "Today",
@@ -101,7 +102,7 @@ function afterRender(state) {
         day: "Day",
         list: "List"
       },
-      height: "500px",
+      height: "600px",
       dayMaxEventRows: true,
       navLinks: true,
       editable: true,
@@ -110,9 +111,12 @@ function afterRender(state) {
         // change the border color just for fun
         info.el.style.borderColor = "red";
       },
+      //drag and drop it
       eventDrop: function(info) {
+        //fix this so that resize works
         handleEventDragResize(info);
       },
+      //stretch to be longer event
       eventResize: function(info) {
         handleEventDragResize(info);
       },
@@ -154,7 +158,8 @@ function afterRender(state) {
     calendar.render();
   }
   //line 149 in example
-  if (state.view === "Lessons" && state.event) {
+  if (state.view === "Home" && state.event.title) {
+    // if (state.view === "Lessons" && state.event) {
     const deleteButton = document.getElementById("delete-lesson");
     deleteButton.addEventListener("click", event => {
       deleteButton.disabled = true;
@@ -170,7 +175,7 @@ function afterRender(state) {
             console.log(
               `Event '${response.data.user}' (${response.data._id}) has been deleted.`
             );
-            router.navigate("/lessons");
+            router.navigate("/Home");
           })
           .catch(error => {
             console.log("It puked", error);
@@ -229,6 +234,7 @@ router.hooks({
     // Add a switch case statement to handle multiple routes
     switch (view) {
       case "Home":
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
         Promise.allSettled([
           axios
             // Get request to retrieve the current weather data using the API key and providing a city name
@@ -238,7 +244,11 @@ router.hooks({
           axios.get(`${process.env.CAL_API_URL}/lessons`)
         ])
           .then(responses => {
+            // const weatherResponse = responses[0];
+            // const lessonsResponse = responses[1];
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
             const [weatherResponse, lessonsResponse] = responses;
+            console.log("responses", responses);
             // Convert Kelvin to Fahrenheit since OpenWeatherMap does provide otherwise
             const kelvinToFahrenheit = kelvinTemp =>
               Math.round((kelvinTemp - 273.15) * (9 / 5) + 32);
@@ -314,6 +324,16 @@ router
         console.log(`View ${view} not defined`);
         render(store.Viewnotfound);
       }
+    },
+    //adding router on
+    ":page/:id": params => {
+      let page = capitalize(params.data.page);
+      render(store[page]);
     }
+    // ":page": params => {
+    //   let page = capitalize(params.data.page);
+    //   render(store[page]);
+    // }
+    //end
   })
   .resolve();
