@@ -3,7 +3,7 @@ import html from "html-literal";
 export default state => html`
   <h1>Contact Me</h1>
   <div class="form" action="https://formspree.io/f/moqzyvpd" method="POST">
-  <p>I'm probably going to add some sort of text here.</p>
+  <p>Let's get this conversation started. Tell me about yourself, and I'll be in touch as soon as I can.</p>
   <form action="https://formspree.io/f/moqzyvpd" method="POST" class="contactform">
     <h2>I'd love to hear from you!</h2>
     <label for="name">Name:</label>
