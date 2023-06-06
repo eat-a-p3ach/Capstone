@@ -158,7 +158,7 @@ function afterRender(state) {
     calendar.render();
   }
   //line 149 in example
-  if (state.view === "Home" && state.event.title) {
+  if (state.view === "Delesson") {
     // if (state.view === "Lessons" && state.event) {
     const deleteButton = document.getElementById("delete-lesson");
     deleteButton.addEventListener("click", event => {
@@ -231,6 +231,7 @@ router.hooks({
       params && params.data && params.data.view
         ? capitalize(params.data.view)
         : "Home";
+    let id = params?.data?.id ? params.data.id : "";
     // Add a switch case statement to handle multiple routes
     switch (view) {
       case "Home":
@@ -268,7 +269,7 @@ router.hooks({
                 title: event.user,
                 start: new Date(event.start),
                 end: new Date(event.end),
-                url: `/lessons/${event._id}`,
+                url: `/delesson/${event._id}`,
                 allDay: event.allDay || false
               };
             });
@@ -298,6 +299,29 @@ router.hooks({
           });
         break;
 
+      //adding delesson case
+      case "Delesson":
+        axios
+          //do I create the const deleteButton
+          .get(`${process.env.CAL_API_URL}/lessons/${id}`)
+          .then(response => {
+            console.log(response);
+            store.Delesson.event = {
+              id: response.data._id,
+              title: response.data.user,
+              start: new Date(response.data.start),
+              end: new Date(response.data.end),
+              url: `/Delesson/${response.data._id}`
+            };
+            done();
+          })
+          .catch(error => {
+            console.log("It puked", error);
+            done();
+          });
+        break;
+      //end delesson
+
       default:
         done();
     }
@@ -326,10 +350,11 @@ router
       }
     },
     //adding router on
-    ":page/:id": params => {
-      let page = capitalize(params.data.page);
-      render(store[page]);
+    ":view/:id": params => {
+      let view = capitalize(params.data.view);
+      render(store[view]);
     }
+
     // ":page": params => {
     //   let page = capitalize(params.data.page);
     //   render(store[page]);
