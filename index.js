@@ -3,12 +3,13 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-import { text } from "stream/consumers";
-import { timeEnd } from "console";
-
+// import { text } from "stream/consumers";
+// import { timeEnd } from "console";
+//initialize new router with a root URL of "/" which allows you to define routes and handle navigation
 const router = new Navigo("/");
 var calendar;
-
+//define a function called render that takes optional 'state' parameter with default value 'store.Home'
+//this function updates the content of the HTML element with the id "root"
 function render(state = store.Home) {
   document.querySelector("#root").innerHTML = `
   ${Header(state)}
@@ -18,10 +19,11 @@ function render(state = store.Home) {
   `;
 
   afterRender(state);
-
+  //afterRender with state argument updates het page links using updatePageLinks method of router object
   router.updatePageLinks();
 }
 
+//drag a lesson to span 1 or multiple days
 function handleEventDragResize(info) {
   const event = info.event;
   if (confirm("Are you sure about this change?")) {
@@ -58,6 +60,7 @@ function afterRender(state) {
     );
 
   //line 58 in example
+  //capture form input values, prevent default form submission behavior, construt requestData object with input values
   if (state.view === "Lessons") {
     document.querySelector("form").addEventListener("submit", event => {
       event.preventDefault();
@@ -74,7 +77,7 @@ function afterRender(state) {
       axios
         .post(`${process.env.CAL_API_URL}/lessons`, requestData)
         .then(response => {
-          // Push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+          // Push the new lesson onto the Lesson state lessons attribute, so it can be displayed in the lessons table
           store.Home.lessons.push(response.data);
           router.navigate("/Home");
         })
@@ -84,7 +87,6 @@ function afterRender(state) {
     });
   }
 
-  //lines 83-171 in https://github.com/savvy-coders/full-calendar-spa-example/blob/master/index.js
   if (state.view === "Home" && state.lessons) {
     const calendarEl = document.getElementById("calendar");
     calendar = new FullCalendar.Calendar(calendarEl, {
@@ -109,7 +111,7 @@ function afterRender(state) {
       selectable: true,
       eventClick: function(info) {
         // change the border color just for fun
-        info.el.style.borderColor = "red";
+        info.el.style.borderColor = "black";
       },
       //drag and drop it
       eventDrop: function(info) {
