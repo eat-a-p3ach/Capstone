@@ -2,12 +2,13 @@ import html from "html-literal";
 
 export default () =>
   html`
-    <section id="jumbotrontwo">
-      TRAINING PAGE - CREATE FLOW CHART
-    </section>
+    <section id="jumbotrontwo"></section>
     <br />
     <div id="calendar"></div>
 
+    <br /><br /><br />
+    <h2>Submit a move to create your library</h2>
+    <br /><br /><br />
     <div class="form">
       <form action="" method="POST" class="library">
         <label for="user">Enter Your Name:</label>
@@ -46,4 +47,5 @@ export default () =>
         </div>
       </form>
     </div>
+    <br /><br /><br />
   `;
